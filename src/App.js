@@ -1,40 +1,18 @@
 import './App.css';
 import React,{useState,useEffect} from 'react';
 import axios from 'axios'
+import {Note} from './Note'
 
 
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    date: '2019-05-30T18:39:34.091Z',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
-    important: true
-  }
-]
 
-const Note =({id,content}) => { return (
-<strong>
-<p>{id}</p>
-<p>{content}</p>
-</strong>)}
 
-function App() {
+
+function App(props) {
   // useEffect (() => {axios.get()})
-  /* const [notes,setNotes] = useState ([])
-  const [newNotes,setNewNotes] = useState('')
-  const [loading,setLoading] = useState (false)
+  const [notes,setNotes] = useState (props.notesProps)
+  
+  /* const [newNotes,setNewNotes] = useState('')
+     const [loading,setLoading] = useState (false)
 
 
    useEffect(()=> {
@@ -56,8 +34,8 @@ function App() {
   return (
     <div className="App">
      <h2>RGC</h2> 
-    <p>{notes.map(note=> <Note key={note.id} id={note.id} content={note.content} />)}
-    </p> 
+    <div>{notes.map(note => <Note key={note.id} id={note.id} content={note.content} />)}
+    </div> 
     </div>
   );
 }
