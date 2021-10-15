@@ -24,6 +24,12 @@ const notes = [
   }
 ]
 
+const Note =({id,content}) => { return (
+<strong>
+<p>{id}</p>
+<p>{content}</p>
+</strong>)}
+
 function App() {
   // useEffect (() => {axios.get()})
   /* const [notes,setNotes] = useState ([])
@@ -50,7 +56,8 @@ function App() {
   return (
     <div className="App">
      <h2>RGC</h2> 
-    <p>{notes.map(note=>(<strong>{note.id}</strong>))}</p> 
+    <p>{notes.map(note=> <Note key={note.id} id={note.id} content={note.content} />)}
+    </p> 
     </div>
   );
 }
