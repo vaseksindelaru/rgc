@@ -11,18 +11,25 @@ function App(props) {
   // useEffect (() => {axios.get()})
   const [notes,setNotes] = useState (props.notesProps);
   const [newNotes,setNewNotes] = useState('')
+  const [showAll,setShowAll] = useState(true)
  
 
   const handelChange = (evento) => {
+   
     setNewNotes(evento.target.value)}
   
-    const handelClick = (evento) => {
-  console.log('creando notas');
-  const notesToAdd = {id: notes.length + 1, content: newNotes};
-  console.log(notesToAdd)
-  setNotes(notes.concat(notesToAdd))
-  setNewNotes('')
+  const handelSubmit = (event) => {
+    event.preventDefault()  
+    console.log('creando notas');
+    const notesToAdd = {id: notes.length + 1, content: newNotes, important: Math.random() <0.5};
+    console.log(notesToAdd)
+    setNotes(notes.concat(notesToAdd))
+    setNewNotes('')
   };
+  
+  /* bootcamp: const notesToShow = showAll
+  ? notes
+  : notes.filter(note => note.important) */ 
   
   /*  const [loading,setLoading] = useState (false)
     useEffect(()=> {
@@ -39,20 +46,31 @@ function App(props) {
      },2000);
   },[]) 
  */
-  
+const handelShowAll=()=>{setShowAll(()=>!showAll)}
   return (
     <div className="App">
-     
+     {/*  bootcamp: <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all' }
+        </button>
+      </div> 
+      <ul>
+      {notesToShow.map(note =>
+          <Note key={note.id} note={note} />)}
+      </ul>   */} 
      <h2>RGC</h2> 
-     <div>{notes.map(note => <Note key={note.id} id={note.id} content={note.content} />)}</div> 
+    <button onClick={handelShowAll}>{showAll ? 'show only important' : 'show all'}</button>
+     <div>{notes
+     .filter(note=>{if(showAll===true) return note ; return note.important})
+     .map(note => <Note key={note.id} id={note.id} content={note.content} />)}</div> 
      
-     <div>
+     <form onSubmit={handelSubmit}>
      <input type='text' onChange={handelChange} value={newNotes}></input>
-     <button onClick={handelClick}>crear notas</button>
+     <button>crear notas</button>
+     </form>
+
      </div>
-    
-    </div>
-  );
-}
+    ); 
+  }
 
 export default App;
