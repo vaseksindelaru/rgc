@@ -1,8 +1,8 @@
-import './App.css';
-import React,{useState,useEffect} from 'react';
-import axios from 'axios'
-import {Note} from './Note'
 
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
+import {Coin} from './coin.js';
+import './App.css';
 
 
 function App() 
@@ -37,7 +37,11 @@ function App()
   return (
     <div>
     <h2>RGC</h2> 
-    <div>{notes.map(note => <Note key={note.id} id={note.id} symbol={note.symbol} image={note.image}/>)}</div> 
+    <div>{notes.map(note => <Coin key={note.id} 
+     name={note.name}
+     id={note.id} 
+     symbol={note.symbol} 
+     image={note.image} />)}</div> 
     <form onSubmit={handleSubmit}>
      <input type='text' onChange={handelChange} value={newNotes}></input>
      <button>crear notas</button>
