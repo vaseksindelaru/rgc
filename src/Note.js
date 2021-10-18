@@ -1,8 +1,10 @@
-export const Note =({id,content,important}) => 
+import { notStrictEqual } from "assert"
+
+export const Note =({id,symbol,image}) => 
 { return (
     <strong>
     <p>{id}</p>
-    <p>{content}</p>
-    <p>{important}</p>
+    <p>{image}</p>
+    <p>{symbol}</p>
     </strong>)}
 

@@ -2,16 +2,28 @@ import './App.css';
 import React,{useState,useEffect} from 'react';
 import axios from 'axios'
 import {Note} from './Note'
+import { notStrictEqual } from 'assert';
+
 
 function App() 
 {
 
-  // useEffect (() => {axios.get()})
+ 
   const [notes,setNotes] = useState ([]);
   const [newNotes,setNewNotes] = useState('')
-  
-  const handelChange = (evento) => {
- setNewNotes(evento.target.value)}
+
+  useEffect(()=>
+  {
+   console.log('useEffect')
+   fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+    .then (res=>res.json())
+    .then (json=>{console.log(json);setNotes(json)})
+  },[])
+ 
+  const handelChange = (evento) => 
+  {
+   setNewNotes(evento.target.value)
+  }
  
  const handleSubmit = (event) => 
   {
@@ -24,7 +36,7 @@ function App()
   return (
     <div>
     <h2>RGC</h2> 
-    <div>{notes.map(note => <Note key={note.id} id={note.id} content={note.content} />)}</div> 
+    <div>{notes.map(note => <Note key={note.id} id={note.id} symbol={note.symbol} image={note.image}/>)}</div> 
     <form onSubmit={handleSubmit}>
      <input type='text' onChange={handelChange} value={newNotes}></input>
      <button>crear notas</button>
