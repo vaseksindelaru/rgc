@@ -2,7 +2,7 @@ import './App.css';
 import React,{useState,useEffect} from 'react';
 import axios from 'axios'
 import {Note} from './Note'
-import { notStrictEqual } from 'assert';
+
 
 
 function App() 
@@ -17,8 +17,7 @@ function App()
    console.log('useEffect')
    axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
     .then ((res)=>{
-      const{data}=res
-      setNotes(data)
+      setNotes(res.data)
       console.log(res)})
   },[])
  

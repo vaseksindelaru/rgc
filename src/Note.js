@@ -4,7 +4,7 @@ export const Note =({id,symbol,image}) =>
 { return (
     <strong>
     <p>{id}</p>
-    <p>{image}</p>
+    <img src={image} alt='crypto'></img>
     <p>{symbol}</p>
     </strong>)}
 
