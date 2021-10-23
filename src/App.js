@@ -36,7 +36,7 @@ function App()
    
   return (
     <div>
-    <h2>RGC</h2> 
+    <h2 className='logo'>RGC</h2> 
     <div>{notes.map(note => <Coin key={note.id} 
      name={note.name}
      id={note.id} 
